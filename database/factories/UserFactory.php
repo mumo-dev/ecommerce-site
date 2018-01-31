@@ -21,3 +21,28 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Category::class, function (Faker $faker){
+    return [
+        'name'=>$faker->word
+    ] ;
+ });
+
+ $factory->define(App\Product::class,function (Faker $faker){
+    return[
+        'category_id'=>App\Category::all()->random()->id,
+        'name'=>$faker->word,
+        'quantity'=>$faker->randomNumber(2),
+        'description' => $faker->sentence(),
+        'details' => $faker->text(),
+        'price'=>$faker->numberBetween(100,2500)
+    ];
+});
+$factory->define(App\Image::class, function (Faker $faker) {
+    return [
+        'image_url'=>$faker->randomElement(['photo1.jpg','photo2.jpg','photo3.jpg','photo4.jpg',
+            'photo5.jpg','photo6.jpg','photo7.jpg','photo8.jpg','photo9.jpg','photo10.jpg',
+            'photo11.jpg','photo12.jpg','photo13.jpg','photo14.jpg','photo15.jpg','photo16.jpg','photo17.jpg']),
+        'product_id'=>App\Product::all()->random()->id
+    ];
+});
