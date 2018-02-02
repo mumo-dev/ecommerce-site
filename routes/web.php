@@ -12,9 +12,9 @@
 */
 
 Route::get('/', function () {
-    $products = App\Product::with(['images','category'])->paginate(10);
+    
     // return $products;
-    return view('welcome',compact('products'));
+    return view('welcome');
 });
 
 Route::get('/admin', function () {

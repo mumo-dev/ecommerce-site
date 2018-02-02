@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class ProductsController extends Controller
 {
-    // public function index(){}
+     public function index(){
+        $products = Product::with(['images','category'])->paginate(10);
+        return response()->json($products);
+     }
 }
