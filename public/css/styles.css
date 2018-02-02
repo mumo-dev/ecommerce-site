@@ -25,5 +25,9 @@
     padding: 6px;
     border: 1px solid #2a88bd;
     border-radius: 4px;
+    margin-left:10px;
+}
+.li-item:hover{
+    background-color: #f7f7f9;
 }
 

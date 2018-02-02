@@ -12,9 +12,8 @@
 */
 
 Route::get('/', function () {
-    
-    // return $products;
-    return view('welcome');
+    $categories = App\Category::all();
+    return view('welcome',compact('categories'));
 });
 
 Route::get('/admin', function () {

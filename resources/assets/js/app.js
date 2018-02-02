@@ -16,6 +16,8 @@ const app = new Vue({
       products:[],
       searchItem:'',
       pagination:{},
+      category:'',
+
       
     },
     created(){
@@ -25,10 +27,12 @@ const app = new Vue({
     methods:{
         fetchProducts(url){
             url = url || '/api/products';
+            
             axios.get(url).then(({data})=>{
                 console.log(data);
                 this.products = data.data;
                 this.makePagination(data);
+                this.searchItem ='';
             }).catch(err=>{
                 console.log(err);
             })

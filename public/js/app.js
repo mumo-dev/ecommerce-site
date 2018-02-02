@@ -1106,7 +1106,8 @@ var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
     data: {
         products: [],
         searchItem: '',
-        pagination: {}
+        pagination: {},
+        category: ''
 
     },
     created: function created() {
@@ -1119,12 +1120,14 @@ var app = new __WEBPACK_IMPORTED_MODULE_1_vue___default.a({
             var _this = this;
 
             url = url || '/api/products';
+
             axios.get(url).then(function (_ref) {
                 var data = _ref.data;
 
                 console.log(data);
                 _this.products = data.data;
                 _this.makePagination(data);
+                _this.searchItem = '';
             }).catch(function (err) {
                 console.log(err);
             });
@@ -43112,6 +43115,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43303,24 +43310,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row" },
-    _vm._l(_vm.products, function(product, index) {
-      return _c(
-        "div",
-        { key: index },
-        [
-          _c("app-product", { attrs: { product: product } }),
-          _vm._v(" "),
-          (index + 1) % 3 == 0
-            ? _c("div", { staticClass: "clearfix" })
-            : _vm._e()
-        ],
-        1
-      )
-    })
-  )
+  return _c("div", { staticClass: "row" }, [
+    _vm.products.length !== 0
+      ? _c(
+          "div",
+          _vm._l(_vm.products, function(product, index) {
+            return _c(
+              "div",
+              { key: index },
+              [
+                _c("app-product", { attrs: { product: product } }),
+                _vm._v(" "),
+                (index + 1) % 3 == 0
+                  ? _c("div", { staticClass: "clearfix" })
+                  : _vm._e()
+              ],
+              1
+            )
+          })
+        )
+      : _c(
+          "div",
+          {
+            staticStyle: {
+              "background-color": "white",
+              padding: "20px",
+              margin: "20px",
+              "border-radius": "4px"
+            }
+          },
+          [_c("h3", [_vm._v("Sorry, No items where found ")])]
+        )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

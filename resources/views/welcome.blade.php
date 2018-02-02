@@ -19,9 +19,9 @@
                   <hr>
                  
                   <div id="app">
-                        <div class="text-center">
+                        <div class="col-md-offset-3">
                              <input type="search" v-model="searchItem" placeholder="search..." class="searchbar"/>
-                             <button class="btn btn-primary">search 
+                             <button class="btn btn-primary" @click ="fetchProducts('/api/products?search='+ searchItem)">search 
                                  <i class="fa fa-search"></i>
                              </button>
                         </div>
@@ -30,7 +30,15 @@
 
                           <div class="col-md-3">
                             <div class="sidebar">
-                                <h4>sidebar</h4>
+                                <h2>Categories</h2>
+                                <ul class="list-group">
+                                    @foreach($categories as $category)
+                                    <li class="list-group-item li-item"
+                                       @click ="fetchProducts('/api/products?category={{$category->name}}')" >
+                                        <strong>{{ $category->name }}</strong>
+                                    </li>
+                                    @endforeach
+                                 </ul>
                             </div>
                           </div>
                      
