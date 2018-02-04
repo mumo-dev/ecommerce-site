@@ -27,7 +27,7 @@
         @if (Route::has('login'))
             @auth
               
-             <li role="presentation" class="active"><a href="{{ route('home')}}">Home</a></li>
+             <li role="presentation" class="active"><a href="{{ url('/')}}">Home</a></li>
              <li role="presentation"><a href="#">Our services</a></li>
              <li role="presentation"><a href="#">About us</a></li>
              <li role="presentation"><a href="#">my cart

@@ -30,4 +30,10 @@
 .li-item:hover{
     background-color: #f7f7f9;
 }
+.mb-2{
+   margin-bottom: 2px;
+}
+.mt-2{
+    margin-top: 2px;
+ }
 

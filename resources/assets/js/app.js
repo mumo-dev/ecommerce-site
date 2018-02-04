@@ -5,10 +5,12 @@ import Vue from 'vue';
 window.Vue = Vue;
 
 import Products from './components/Products.vue';
-import Paginate from './components/Paginate.vue';
+import Slider from './components/ImageSlider.vue';
+import Reviews from './components/Reviews.vue';
 
 Vue.component('app-products',Products);
-Vue.component('app-paginate',Paginate);
+Vue.component('app-image-slider',Slider);
+Vue.component('app-reviews',Reviews);
 const app = new Vue({
     el: '#app',
    
@@ -17,8 +19,7 @@ const app = new Vue({
       searchItem:'',
       pagination:{},
       category:'',
-
-      
+      review:''
     },
     created(){
          this.fetchProducts();
@@ -45,6 +46,15 @@ const app = new Vue({
                 last_page : data.last_page
             };
             this.pagination = pages;
+        },
+        submitReview(id,user){
+            axios.post('/api/reviews/'+id,{
+                'review':this.review,
+                'user_id': user
+            })
+              .then(response=>{
+                  this.review =''
+              })
         }
     },
     computed:{

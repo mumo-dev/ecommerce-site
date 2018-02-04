@@ -17,8 +17,8 @@
                             Add to cart
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     </button>
-                    <a href="#" class=" btn btn-default pull-right" >view details</a>
-
+                    <a :href="'/products/'+product.id" class=" btn btn-default pull-right" >view details</a>
+         
                 </p>
                 
                 </div>

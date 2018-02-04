@@ -46,3 +46,11 @@ $factory->define(App\Image::class, function (Faker $faker) {
         'product_id'=>App\Product::all()->random()->id
     ];
 });
+
+$factory->define(App\Review::class, function (Faker $faker){
+    return [
+        'user_id'=>App\User::all()->random()->id,
+        'product_id'=>App\Product::all()->random()->id,
+        'review'=>$faker->sentence()
+    ];
+});
