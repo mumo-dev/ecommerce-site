@@ -2,6 +2,7 @@
 
 import './bootstrap';
 import Vue from 'vue';
+import { store } from './store/store'
 window.Vue = Vue;
 
 import Products from './components/Products.vue';
@@ -13,7 +14,8 @@ Vue.component('app-image-slider',Slider);
 Vue.component('app-reviews',Reviews);
 const app = new Vue({
     el: '#app',
-   
+    store,
+
     data:{
       products:[],
       searchItem:'',
@@ -47,19 +49,14 @@ const app = new Vue({
             };
             this.pagination = pages;
         },
-        submitReview(id,user){
-            axios.post('/api/reviews/'+id,{
+        submitReview(product_id,user_id ){
+            axios.post('/api/reviews/'+product_id,{
                 'review':this.review,
-                'user_id': user
-            })
-              .then(response=>{
-                  this.review =''
+                'user_id': user_id 
+            }).then(response=>{
+                  this.review ='';
+                  this.$store.dispatch('addReview',response.data);
               })
-        }
-    },
-    computed:{
-        categories(){
-            
         }
     }
 });

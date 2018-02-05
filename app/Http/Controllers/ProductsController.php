@@ -47,16 +47,14 @@ class ProductsController extends Controller
          $review->user_id = $request->user_id;
         //  dd($review);
          $review->save();
-
-         if($review){
-            return response()->json([
-                'message'=>'Success'
-            ]);
-         }else{
-            return response()->json([
-                'message'=>'error'
-            ]);
-         }
         
-     }
+         $res = Review::with(['user'])->find($review->id);
+         if($review){
+            return response()->json(
+                $res
+            );
+         }
+    }
+        
+     
 }

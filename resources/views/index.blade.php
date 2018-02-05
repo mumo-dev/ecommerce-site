@@ -88,7 +88,9 @@
                             <textarea class="form-control" v-model="review"></textarea>
                         </div>
                         
-                        <a class="btn btn-primary pull-right" href="#" @click="submitReview({{ $product->id }},{{Auth::id()}})">Submit</a>
+                        <a class="btn btn-primary pull-right" href="#" 
+                        @click.prevent="submitReview({{ $product->id }}, {{Auth::id() }})">
+                        Submit</a>
                     </div>
                     <div style="margin-bottom :30px"></div>
                 </div>

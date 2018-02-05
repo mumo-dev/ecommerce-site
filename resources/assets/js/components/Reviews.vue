@@ -38,12 +38,16 @@
         
         data(){
           return{
-              reviews:[],
               loading:'',
               errors:''
           }
         },
-
+        computed:{
+           reviews(){
+               return this.$store.getters.reviews;
+           }
+        },
+    
         created(){
              this.fetchReviews();
         },
@@ -54,7 +58,7 @@
                 axios.get('/api/reviews/'+this.product_id)
                   .then(response=>{
                     this.loading = false;
-                    this.reviews = response.data;
+                    this.$store.dispatch('setReviews',  response.data);
                   }).catch(err=>{
                        this.errors = err.data;
                        console.log(err)
