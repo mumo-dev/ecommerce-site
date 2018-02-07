@@ -21,13 +21,15 @@
          <tr><td colspan="8"><hr style="margin:0"></td></tr>
           <tr><td colspan="4"><strong>Total cost</strong></td> <td colspan="4"> <b> $ {{ totalCost }}.00</b></td></tr>
       </table>
-      <button  class="btn btn-danger">Empty Cart</button>
-      <button class="btn btn-success pull-right">Make Your Order</button>
+      <button  class="btn btn-danger" @click="emptyCart" v-if="cartItems.length !== 0">Empty Cart</button>
+      <button class="btn btn-success pull-right" @click="postOrder" v-if="cartItems.length !== 0">Make Your Order</button>
   </div>
 </template>
 <script>
+    import swal from 'sweetalert'
     import CartItem from './CartItem.vue'
     export default {
+        props:['id'],
         computed:{
             cartItems(){
                 return this.$store.getters.cartItems;
@@ -45,7 +47,34 @@
         },
         methods:{
             postOrder(){
-                // axios.post('/api/')
+                swal({
+                    title:'Confirmation',
+                    text:'Are you really sure you want to make this order?',
+                    icon:'warning',
+                    buttons:true
+                }).then((willbook)=>{
+                      if(willbook){
+                        const  data ={
+                            orders: this.cartItems,
+                            userId: this.id
+                        };
+                        axios.post('/api/orders',data)
+                        .then(response=>{
+                            if(response.status == 200){
+                            swal('ORDER','The Order has successfully  been recieved','success');
+                            this.$store.dispatch('emptyCart');
+                            }
+                        }).catch(err=> console.log(err));
+
+                      }else{
+                          swal('Order  cancelled');
+                      }
+                    
+                });
+                
+            },
+            emptyCart(){
+                this.$store.dispatch('emptyCart');
             }
         }
     

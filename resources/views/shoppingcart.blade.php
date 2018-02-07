@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <app-cart></app-cart>
+                    <app-cart :id="{{ Auth::user()->id }}"></app-cart>
                 </div>
             </div>
         </div>

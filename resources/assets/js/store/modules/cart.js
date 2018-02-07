@@ -69,8 +69,8 @@ const actions ={
     removeItem:({commit}, payload)=>{
         commit('REMOVE_ITEM',payload);
     },
-    emptyCart:({commit},payload)=>{
-        commit('EMPTY_CART',payload);
+    emptyCart:({commit})=>{
+        commit('EMPTY_CART');
     },
     increment:({commit},payload)=>{
         commit('INC',payload);

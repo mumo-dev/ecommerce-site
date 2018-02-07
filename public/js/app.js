@@ -60429,10 +60429,10 @@ var actions = {
 
         commit('REMOVE_ITEM', payload);
     },
-    emptyCart: function emptyCart(_ref4, payload) {
+    emptyCart: function emptyCart(_ref4) {
         var commit = _ref4.commit;
 
-        commit('EMPTY_CART', payload);
+        commit('EMPTY_CART');
     },
     increment: function increment(_ref5, payload) {
         var commit = _ref5.commit;
@@ -61522,8 +61522,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CartItem_vue__ = __webpack_require__(180);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CartItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__CartItem_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CartItem_vue__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CartItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__CartItem_vue__);
 //
 //
 //
@@ -61551,9 +61553,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['id'],
     computed: {
         cartItems: function cartItems() {
             return this.$store.getters.cartItems;
@@ -61567,7 +61571,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     components: {
-        'item-row': __WEBPACK_IMPORTED_MODULE_0__CartItem_vue___default.a
+        'item-row': __WEBPACK_IMPORTED_MODULE_1__CartItem_vue___default.a
+    },
+    methods: {
+        postOrder: function postOrder() {
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()({
+                title: 'Confirmation',
+                text: 'Are you really sure you want to make this order?',
+                icon: 'warning',
+                buttons: true
+            }).then(function (willbook) {
+                if (willbook) {
+                    var data = {
+                        orders: _this.cartItems,
+                        userId: _this.id
+                    };
+                    axios.post('/api/orders', data).then(function (response) {
+                        if (response.status == 200) {
+                            __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('ORDER', 'The Order has successfully  been recieved', 'success');
+                            _this.$store.dispatch('emptyCart');
+                        }
+                    }).catch(function (err) {
+                        return console.log(err);
+                    });
+                } else {
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert___default()('Order  cancelled');
+                }
+            });
+        },
+        emptyCart: function emptyCart() {
+            this.$store.dispatch('emptyCart');
+        }
     }
 
 });
@@ -62136,11 +62172,24 @@ var render = function() {
           ])
         ]),
     _vm._v(" "),
-    _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Empty Cart")]),
+    _vm.cartItems.length !== 0
+      ? _c(
+          "button",
+          { staticClass: "btn btn-danger", on: { click: _vm.emptyCart } },
+          [_vm._v("Empty Cart")]
+        )
+      : _vm._e(),
     _vm._v(" "),
-    _c("button", { staticClass: "btn btn-success pull-right" }, [
-      _vm._v("Make Your Order")
-    ])
+    _vm.cartItems.length !== 0
+      ? _c(
+          "button",
+          {
+            staticClass: "btn btn-success pull-right",
+            on: { click: _vm.postOrder }
+          },
+          [_vm._v("Make Your Order")]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [

@@ -21,4 +21,4 @@ Route::get('/products','ProductsController@index');
 Route::get('/reviews/{product_id}','ProductsController@getReviews');
 Route::post('/reviews/{product_id}','ProductsController@postReview');
 
-Route::post('/cart','ShoppingCartController@store');
+Route::post('/orders','ShoppingCartController@store');

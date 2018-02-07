@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ShoppingCart extends Model
+class OrderRecord extends Model
 {
     //
 }
