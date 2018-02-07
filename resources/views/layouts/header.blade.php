@@ -30,7 +30,7 @@
              <li role="presentation" class="active"><a href="{{ url('/')}}">Home</a></li>
              <li role="presentation"><a href="#">Our services</a></li>
              <li role="presentation"><a href="#">About us</a></li>
-             <li role="presentation"><a href="#">my cart
+             <li role="presentation"><a href="{{ route('cart')}}">my cart
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
              </a></li>
             @else
@@ -39,7 +39,7 @@
                 <li role="presentation"><a href="#">About us</a></li>
                <li role="presentation"><a href="{{ route('login') }}">Login</a></li>
                <li role="presentation"><a href="{{ route('register') }}">Register</a></li>
-               <li role="presentation"><a href="#">my cart
+               <li role="presentation"><a href="{{ route('cart')}}">my cart
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
              </a></li>
             @endauth

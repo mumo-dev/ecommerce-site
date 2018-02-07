@@ -14,8 +14,8 @@
          <ul class="list-group">
             <li class="list-group-item" v-for="review in reviews" :key="review.id">
                <span class="pull-right clearfix text-success"><small>
-                  <strong>  {{ review.user.name }} </strong>
-                    at {{ review.created_at}}</small></span>
+                  <strong>  {{ review.user.name }} :</strong>
+                     {{ date(review.created_at) }}</small></span>
                <br>
                 <p class="text-muted">
                     {{ review.review }}
@@ -33,6 +33,7 @@
   </div>
 </template>
 <script>
+   import moment from 'moment'
     export default {
         props:['product_id'],
         
@@ -45,7 +46,8 @@
         computed:{
            reviews(){
                return this.$store.getters.reviews;
-           }
+           },
+           
         },
     
         created(){
@@ -63,6 +65,9 @@
                        this.errors = err.data;
                        console.log(err)
                   })
+            },
+            date(dateString){
+                return moment(dateString).fromNow();
             }
 
         }

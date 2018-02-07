@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/products','ProductsController@index');
 Route::get('/reviews/{product_id}','ProductsController@getReviews');
 Route::post('/reviews/{product_id}','ProductsController@postReview');
+
+Route::post('/cart','ShoppingCartController@store');

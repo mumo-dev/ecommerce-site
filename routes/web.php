@@ -24,6 +24,7 @@ Auth::routes();
 
 Route::get('/products/{id}', 'ProductsController@show');
 
+Route::get('/myshoppingcart','ShoppingCartController@index')->middleware('auth')->name('cart');
 
 Route::get('/admin/home', 'AdminController@index')->name('admin.home');
 Route::get('/admin/sales', 'SalesController@index')->name('sales.home');

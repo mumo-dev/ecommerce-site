@@ -4,7 +4,7 @@ const state = {
 
 const getters ={
     reviews(state){
-        return state.reviews.reverse();
+        return state.reviews;
     }
 };
 

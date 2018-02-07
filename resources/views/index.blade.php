@@ -15,37 +15,7 @@
 
         </div>
         <div class="col-md-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h2 class="mb-2 text-info" style="display:inline-block"> 
-                        <strong> {{ strtoupper($product->name) }} </strong>
-                   </h2>
-                   <button class="btn btn-default btn-lg pull-right">
-                        <span class="badge">${{ $product->price }}</span>
-                  </button>
-                </div>
-
-                <div class="panel-body">
-                    <span class="text-muted">
-                        <h3 class="mb-2 mt-2"><strong>Product Description:</strong></h3>
-                        <h4>{{ $product->description }}</h4>
-
-                        </span>
-                    <hr class="mb-2 mt-2">
-                      <h3 class="mb-2"><strong>Product details:</strong></h3>
-                      <p>{{ $product->details }}
-                          <br><br>
-                          
-                          <button class="btn btn-info">
-                              Add to cart 
-                              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                          </button>
-                         
-                     </p>
-
-
-                </div>
-            </div>
+            <app-single-product :product="{{$product}}"></app-single-product>
         </div>
     </div>
     <hr>
